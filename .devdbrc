@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "/home/artem/pet-projects/laravel-vue-persons/database/database.sqlite"
+  }
+]
