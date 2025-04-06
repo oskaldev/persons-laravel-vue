@@ -1,17 +1,16 @@
 <script>
-  import AppListTodo from '@/Components/Todo/AppListTodo.vue'
+  import PersonsList from '../../Components/Persons/PersonsList.vue'
 
   export default {
     components: {
-      AppListTodo
+      PersonsList
     },
   }
 </script>
 
 <template>
   <div>
-    Home Page !
-    <AppListTodo />
+    <PersonsList />
   </div>
 </template>
 
