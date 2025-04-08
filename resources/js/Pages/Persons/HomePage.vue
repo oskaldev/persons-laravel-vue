@@ -1,9 +1,18 @@
 <script>
-  import PersonsList from '../../Components/Persons/PersonsList.vue'
+  import PersonsList from '../../Components/Person/Index.vue'
 
   export default {
+    data() {
+      return {
+      }
+    },
     components: {
       PersonsList
+    },
+    methods: {
+    },
+    mounted() {
+      // console.log(this.$refs.index.name)
     },
   }
 </script>
