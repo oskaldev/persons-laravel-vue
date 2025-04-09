@@ -40,12 +40,13 @@ class PersonController extends Controller
     $person = Person::findOrFail($id);
 
     $person->update($request->only(['name', 'age', 'job']));
+    $person = $person->fresh();
 
     return response()->json(['message' => 'Person updated successfully', 'person' => $person]);
   }
   public function destroy(Person $person)
   {
-    
+
     $person->delete();
     return response([]);
   }

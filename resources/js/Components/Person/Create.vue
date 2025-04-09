@@ -12,7 +12,7 @@
       }
     },
     methods: {
-      addPerson() {
+      storePerson() {
         axios.post('/api/persons', { name: this.name, age: this.age, job: this.job })
           .then(data => {
             console.log(data)
@@ -37,7 +37,7 @@
           <input v-model="name" type="text" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" id="todo-input" placeholder="Add name" required>
           <input v-model="age" type="number" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" id="todo-input" placeholder="Add age" required>
           <input v-model="job" type="text" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" id="todo-input" placeholder="Add job">
-          <button @click.prevent="addPerson" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+          <button @click.prevent="storePerson" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
             Add
           </button>
           <div>

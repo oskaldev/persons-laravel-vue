@@ -1,12 +1,12 @@
 <script>
   import axios from 'axios'
   import PersonsCreate from './Create.vue'
-  import PersonsShow from './Show.vue'
+import List from './List.vue'
 
   export default {
     components: {
       PersonsCreate,
-      PersonsShow
+      List
     },
     data() {
       return {
@@ -20,7 +20,7 @@
       getPersons() {
         axios.get('api/persons')
           .then(data => {
-            // console.log(data);
+            console.log(data);
             this.persons = data.data.data
           })
       },
@@ -73,11 +73,14 @@
           <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
             <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
           </th>
+          <th class="p-4 border-b border-blue-gray-100 bg-blue-gray-50">
+            <p class="block font-sans text-sm antialiased font-normal leading-none text-blue-gray-900 opacity-70"></p>
+          </th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="(person, index) in persons" :key="index">
-          <PersonsShow @deletePerson="deletePerson" :person="person" />
+          <List @deletePerson="deletePerson" :person="person" />
         </tr>
       </tbody>
     </table>

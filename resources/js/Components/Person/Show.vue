@@ -2,67 +2,49 @@
   import axios from 'axios'
 
   export default {
-    props: [
-      'person'
-    ],
-    emits: [ 'delete-person' ],
-    methods: {
-      deletePerson(id) {
-        axios.delete(`api/persons/${id}`)
-          .then(data => {
-            console.log(data)
-            this.$emit('delete-person', id)
-          })
-          .catch(err => {
-            console.error('Ошибка при удалении:', err)
-          })
+    data() {
+      return {
+        person: null
       }
+    },
+    mounted() {
+      console.log(this.$route.params)
+      this.getPerson()
+    },
+    methods: {
+      getPerson() {
+        const id = this.$route.params.id
+        axios.get(`/api/persons/${id}`).then(data => {
+          this.person = data.data
+          console.log(data)
+        })
+      },
     }
   }
 </script>
 
 <template>
-  <td class="p-4 border-b border-blue-gray-50">
-    <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      {{ person.id }}
-    </p>
-  </td>
-  <td class="p-4 border-b border-blue-gray-50">
-    <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      {{ person.name }}
-    </p>
-  </td>
-  <td class="p-4 border-b border-blue-gray-50">
-    <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      {{ person.age }}
-    </p>
-  </td>
-  <td class="p-4 border-b border-blue-gray-50">
-    <p v-if="!person.job" class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      Безработный
-    </p>
-    <p v-else class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      {{ person.job }}
-    </p>
-  </td>
-  <td class="p-4 border-b border-blue-gray-50">
-    <router-link :to="{ name: 'person.create' }"
-      class="cursor-pointer text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-      Add
-    </router-link>
-  </td>
-  <td class="p-4 border-b border-blue-gray-50">
-    <router-link :to="{ name: 'person.edit', params: { id: person.id } }"
-      class="cursor-pointer text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-teal-300 dark:focus:ring-teal-800 shadow-lg shadow-teal-500/50 dark:shadow-lg dark:shadow-teal-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">
-      Edit
-    </router-link>
-  </td>
-  <td class="p-4 border-b border-blue-gray-50">
-    <button @click.prevent="deletePerson(person.id)"
-      class="text-white bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 shadow-lg shadow-red-500/50 dark:shadow-lg dark:shadow-red-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">
-      Delete
-    </button>
-  </td>
+  <div class="container mx-auto my-10">
+    <h3 class="text-center text-3xl font-semibold mb-4">Person</h3>
+    <div class="md:w-1/2 mx-auto">
+      <div class="bg-white shadow-md rounded-lg p-6">
+        <div class="flex flex-wrap justify-center mb-4">
+          <div v-if="person" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Name: {{ person.name }}</div>
+          <div v-if="person" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Age: {{ person.age }}</div>
+          <div v-if="person" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Job: {{ person.job }}</div>
+          <div>
+            <router-link :to="{ name: 'home' }" class="cursor-pointer m-3 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
+              Home page
+            </router-link>
+            <router-link v-if="person" :to="{ name: 'person.edit', params: { id: person.id } }" class="cursor-pointer m-3 bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">
+              Edit
+            </router-link>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped></style>
