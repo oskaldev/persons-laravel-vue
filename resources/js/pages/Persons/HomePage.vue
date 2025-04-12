@@ -1,5 +1,5 @@
 <script>
-  import PersonsList from '../../Components/Person/Index.vue'
+  import PersonsList from '../../components/Person/Index.vue'
 
   export default {
     data() {

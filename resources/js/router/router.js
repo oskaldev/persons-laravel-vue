@@ -1,9 +1,9 @@
 
 import { createRouter, createWebHistory } from "vue-router"
-import Edit from "../Components/Person/Edit.vue"
-import HomePage from "../Pages/Persons/HomePage.vue"
-import Create from "../Components/Person/Create.vue"
-import Show from "../Components/Person/Show.vue"
+import Edit from "../components/Person/Edit.vue"
+import HomePage from "../pages/Persons/HomePage.vue"
+import Create from "../components/Person/Create.vue"
+import Show from "../components/Person/Show.vue"
 
 
 

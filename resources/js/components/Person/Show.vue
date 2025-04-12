@@ -1,23 +1,35 @@
 <script>
   import axios from 'axios'
+  import { mapActions, mapState, mapGetters } from 'vuex'
 
   export default {
-    data() {
-      return {
-        person: null
-      }
-    },
+    // data() {
+    //   return {
+    //     person: null
+    //   }
+    // },
     mounted() {
-      this.getPerson()
+      const id = this.$route.params.id
+      this.getPerson(id)
     },
     methods: {
-      getPerson() {
-        const id = this.$route.params.id
-        axios.get(`/api/persons/${id}`).then(data => {
-          this.person = data.data.data
-          console.log(data)
-        })
-      },
+      // getPerson() {
+      //   axios.get(`/api/persons/${id}`).then(data => {
+      //     this.person = data.data.data
+      //     console.log(data)
+      //   })
+      // },
+      ...mapActions({
+        getPerson: 'person/getPerson'
+      })
+    },
+    computed: {
+      ...mapState({
+
+      }),
+      ...mapGetters({
+        person: 'person/getCurrentPerson'
+      })
     }
   }
 </script>
