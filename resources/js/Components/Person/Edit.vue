@@ -14,7 +14,7 @@
       getPerson() {
         const id = this.$route.params.id
         axios.get(`/api/persons/${id}`).then(data => {
-          this.person = data.data
+          this.person = data.data.data
           console.log(data)
         })
       },
@@ -23,6 +23,11 @@
           .then(() => {
             this.$router.push({ name: 'person.show', params: { id: this.person.id } })
           })
+      }
+    },
+    computed: {
+      isDisabled() {
+        return this.person.name && this.person.age
       }
     }
   }
@@ -39,8 +44,8 @@
         <div class="flex items-center mb-4">
           <input v-model="person.name" type="text" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" placeholder="Update name">
           <input v-model="person.age" type="number" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" placeholder="Update age">
-          <input v-model="person.job" type="text" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" placeholder="Update job">
-          <button @click.prevent="updatePerson" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+          <input v-model="person.job" type="text" class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500" placeholder=" ">
+          <button :disabled="!isDisabled" @click.prevent="updatePerson" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
             Update
           </button>
           <div>

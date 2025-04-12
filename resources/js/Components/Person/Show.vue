@@ -14,7 +14,7 @@
       getPerson() {
         const id = this.$route.params.id
         axios.get(`/api/persons/${id}`).then(data => {
-          this.person = data.data
+          this.person = data.data.data
           console.log(data)
         })
       },
@@ -30,7 +30,7 @@
         <div class="flex flex-wrap justify-center mb-4">
           <div class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Name: {{ person.name }}</div>
           <div class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Age: {{ person.age }}</div>
-          <div class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Job: {{ person.job }}</div>
+          <div class="w-full px-4 py-2 mr-2 rounded-lg border-gray-300 focus:outline-none focus:border-blue-500">Job: {{ person.job ?? 'Безработный' }}</div>
           <div>
             <router-link :to="{ name: 'home' }" class="cursor-pointer m-3 bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">
               Home page

@@ -38,11 +38,8 @@
     </p>
   </td>
   <td class="p-4 border-b border-blue-gray-50">
-    <p v-if="!person.job" class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      Безработный
-    </p>
-    <p v-else class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
-      {{ person.job }}
+    <p class="block font-sans text-sm antialiased font-normal leading-normal text-blue-gray-900">
+      {{ person.job ?? 'Безработный' }}
     </p>
   </td>
   <td class="p-4 border-b border-blue-gray-50">

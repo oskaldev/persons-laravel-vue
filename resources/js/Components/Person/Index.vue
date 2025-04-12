@@ -25,7 +25,8 @@ import List from './List.vue'
           })
       },
       deletePerson(id) {
-        this.persons = this.persons.filter(p => p.id !== id)
+        // this.persons = this.persons.filter(p => p.id !== id)
+        this.getPersons();
       }
     },
     computed: {
